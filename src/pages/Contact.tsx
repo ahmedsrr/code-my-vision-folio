@@ -111,7 +111,14 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-foreground">GitHub</h3>
-                  <p className="text-sm text-muted-foreground">github.com/votre-profil</p>
+                  <a
+                    href="https://github.com/ahmedsrr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    github.com/ahmedsrr
+                  </a>
                 </div>
               </div>
             </Card>
