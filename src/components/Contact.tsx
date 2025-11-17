@@ -96,7 +96,9 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-foreground">Email</h3>
-                  <p className="text-sm text-muted-foreground">contact@example.com</p>
+                  <a href="mailto:mohamedsarr97@gmail.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    mohamedsarr97@gmail.com
+                  </a>
                 </div>
               </div>
             </Card>
