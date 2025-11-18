@@ -3,10 +3,19 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { projects } from "@/data/projects";
+import mp3CutterImg from "@/assets/project-mp3-cutter.jpg";
+import thioubeneImg from "@/assets/project-thioubene-multishop.jpg";
+import ePoubelleImg from "@/assets/project-e-poubelle.jpg";
 
 const ProjectDetail = () => {
   const { id } = useParams();
   const project = projects.find((p) => p.id === id);
+
+  const projectImages: Record<string, string> = {
+    "mp3-cutter": mp3CutterImg,
+    "thioubene-multishop": thioubeneImg,
+    "e-poubelle": ePoubelleImg
+  };
 
   if (!project) {
     return (
@@ -61,10 +70,12 @@ const ProjectDetail = () => {
 
           {/* Image */}
           <Card className="overflow-hidden border-border/50">
-            <div className="aspect-video bg-secondary/50 relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center">
-                <p className="text-muted-foreground">Image du projet</p>
-              </div>
+            <div className="aspect-video bg-secondary/50 relative overflow-hidden">
+              <img 
+                src={projectImages[project.id]} 
+                alt={project.title}
+                className="w-full h-full object-cover"
+              />
             </div>
           </Card>
 

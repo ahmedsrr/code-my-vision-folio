@@ -3,9 +3,18 @@ import { Card } from "@/components/ui/card";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { projects } from "@/data/projects";
+import mp3CutterImg from "@/assets/project-mp3-cutter.jpg";
+import thioubeneImg from "@/assets/project-thioubene-multishop.jpg";
+import ePoubelleImg from "@/assets/project-e-poubelle.jpg";
 
 const Home = () => {
   const featuredProjects = projects.slice(0, 3);
+  
+  const projectImages: Record<string, string> = {
+    "mp3-cutter": mp3CutterImg,
+    "thioubene-multishop": thioubeneImg,
+    "e-poubelle": ePoubelleImg
+  };
 
   return (
     <div className="min-h-screen">
@@ -57,6 +66,11 @@ const Home = () => {
                 className="group bg-background border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-lg overflow-hidden"
               >
                 <div className="aspect-video bg-secondary/50 relative overflow-hidden">
+                  <img 
+                    src={projectImages[project.id]} 
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10" />
                 </div>
                 
