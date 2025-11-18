@@ -65,14 +65,9 @@ All colors MUST be HSL.
     width: 100%;
     height: 100%;
     z-index: 0;
-    opacity: 0.4;
-    background-image: 
-      linear-gradient(45deg, hsl(25 60% 92%) 25%, transparent 25%),
-      linear-gradient(-45deg, hsl(25 60% 92%) 25%, transparent 25%),
-      linear-gradient(45deg, transparent 75%, hsl(30 70% 90%) 75%),
-      linear-gradient(-45deg, transparent 75%, hsl(30 70% 90%) 75%);
-    background-size: 60px 60px;
-    background-position: 0 0, 0 30px, 30px -30px, -30px 0px;
+    opacity: 0.3;
+    background-image: radial-gradient(circle, hsl(25 60% 85%) 1px, transparent 1px);
+    background-size: 24px 24px;
     pointer-events: none;
   }
 
