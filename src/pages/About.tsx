@@ -1,110 +1,124 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Code2, Palette, Zap, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Code2, Palette, Zap } from "lucide-react";
+
+const highlights = [
+  { icon: Code2,   title: "Vision Technique",   description: "Maîtrise de l'écosystème React & TypeScript pour des architectures robustes." },
+  { icon: Palette, title: "Expertise Back-End",  description: "Construction de systèmes scalables avec PHP/Laravel et Spring Boot." },
+  { icon: Zap,     title: "Optimisation Pure",   description: "Chaque milliseconde compte : performance et SEO au cœur du code." },
+];
+
+const stack = ["React 18", "TypeScript", "Spring Boot", "Laravel", "PHP", "Tailwind CSS", "PostgreSQL", "MySQL", "REST APIs"];
 
 const About = () => {
-  const skills = [
-    {
-      icon: Code2,
-      title: "Développement Front-End",
-      description: "Expert en React, TypeScript et technologies web modernes pour créer des interfaces performantes et réactives.",
-    },
-    {
-      icon: Palette,
-      title: "Design & UX",
-      description: "Création d'expériences utilisateur intuitives avec un sens aigu du détail et de l'esthétique.",
-    },
-    {
-      icon: Zap,
-      title: "Performance",
-      description: "Optimisation des applications pour une rapidité et une fluidité maximales.",
-    },
-  ];
-
   return (
-    <div className="min-h-screen py-20 px-6">
-      <div className="container mx-auto max-w-4xl">
-        {/* Header */}
-        <div className="text-center space-y-4 mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold">
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              À propos
-            </span>
-          </h1>
-          <p className="text-muted-foreground text-lg">
-            Développeur passionné par la création d'expériences web exceptionnelles
-          </p>
+    <div className="min-h-screen bg-[#faf9f8] py-12">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        {/* Editorial bio block — "Less Interface, More Impact" */}
+        <div className="flex flex-col md:flex-row items-start gap-16 mb-24 pb-24 border-b border-[#e0c0b2]/30">
+          <div className="w-full md:w-1/2">
+            <h2 className="font-headline text-4xl md:text-6xl font-black tracking-tighter uppercase text-[#1a1c1c] leading-[0.9]">
+              Transformer les idées
+              <br />
+              <span className="text-[#ad2b1f] italic">en réalités</span>
+              <br />
+              numériques.
+            </h2>
+          </div>
+          <div className="w-full md:w-1/2 flex flex-col gap-6 pt-2">
+            <p className="font-body text-xl text-[#1a1c1c] leading-relaxed">
+              Je crois au pouvoir du design invisible. En supprimant le superflu, je laisse
+              le contenu parler avec autorité. Mon travail est un mariage entre précision
+              géométrique et interaction fluide.
+            </p>
+            <p className="font-body text-[#594238] leading-relaxed">
+              Basé au Sénégal, je suis un développeur web full stack spécialisé dans la
+              création d'écosystèmes numériques complets et haut de gamme. Je ne me contente
+              pas de coder — je conçois des expériences mémorables.
+            </p>
+
+            {/* Warm accent rule */}
+            <div className="h-2 w-24 bg-[#944a00] rounded-sm mt-2" />
+          </div>
         </div>
 
-        {/* Introduction */}
-        <Card className="p-8 mb-12 border-border/50">
-          <div className="space-y-4 text-muted-foreground leading-relaxed">
-            <p>
-              Bonjour ! Je suis un développeur web front-end passionné par la création d'interfaces 
-              modernes et performantes. Mon expertise se concentre sur React et l'écosystème JavaScript 
-              moderne.
-            </p>
-            <p>
-              J'aime transformer des idées complexes en expériences utilisateur simples et élégantes. 
-              Chaque projet est une opportunité d'apprendre et de repousser les limites du développement web.
-            </p>
-            <p>
-              Mon approche combine rigueur technique et créativité pour livrer des solutions qui 
-              dépassent les attentes, tout en maintenant un code propre et maintenable.
-            </p>
+        {/* ── Highlights — no borders, tonal via bg ── */}
+        <div className="mb-24">
+          <div className="flex items-baseline gap-4 mb-12">
+            <span className="text-eyebrow text-[#944a00] whitespace-nowrap">Expertise</span>
+            <div className="section-rule" />
+            <h2 className="font-headline text-3xl font-bold tracking-tighter shrink-0 text-[#1a1c1c]">
+              Ce que je fais
+            </h2>
           </div>
-        </Card>
 
-        {/* Skills */}
-        <div className="space-y-8 mb-12">
-          <h2 className="text-3xl font-bold text-center text-foreground">Compétences</h2>
-          
-          <div className="grid md:grid-cols-3 gap-6">
-            {skills.map((skill) => {
-              const Icon = skill.icon;
+          <div className="grid md:grid-cols-3 gap-8">
+            {highlights.map((item, i) => {
+              const Icon = item.icon;
               return (
-                <Card key={skill.title} className="p-6 border-border/50 hover:border-primary/50 transition-all">
-                  <div className="space-y-4">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <Icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="text-lg font-semibold text-foreground">{skill.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {skill.description}
-                    </p>
+                <div
+                  key={i}
+                  className="group bg-[#f4f3f2] rounded-xl p-8 hover:bg-[#e9e8e7] transition-colors duration-300"
+                >
+                  <div className="w-12 h-12 rounded-lg bg-[#ffdad5] flex items-center justify-center mb-6 group-hover:bg-[#ad2b1f] transition-colors duration-300">
+                    <Icon size={20} strokeWidth={1.5} className="text-[#ad2b1f] group-hover:text-white transition-colors" />
                   </div>
-                </Card>
+                  <h3 className="font-headline text-xl font-bold text-[#1a1c1c] mb-3 group-hover:text-[#ad2b1f] transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="font-body text-sm text-[#594238] leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
               );
             })}
           </div>
         </div>
 
-        {/* Technologies */}
-        <Card className="p-8 mb-12 border-border/50">
-          <h2 className="text-2xl font-bold mb-6 text-foreground">Technologies</h2>
+        {/* Patterned break */}
+        <div className="patterned-break mb-24" />
+
+        {/* ── Stack ── */}
+        <div className="mb-24">
+          <div className="flex items-baseline gap-4 mb-10">
+            <h2 className="font-headline text-3xl font-bold tracking-tighter shrink-0 text-[#1a1c1c]">
+              La Stack
+            </h2>
+            <div className="section-rule" />
+          </div>
           <div className="flex flex-wrap gap-3">
-            {["React", "TypeScript", "JavaScript", "HTML/CSS", "Tailwind CSS", "Git", "Node.js", "REST APIs", "Responsive Design"].map((tech) => (
+            {stack.map((tech) => (
               <span
                 key={tech}
-                className="px-4 py-2 bg-secondary rounded-full text-sm font-medium text-foreground"
+                className="px-5 py-2.5 rounded-full bg-[#f4f3f2] border border-[#e0c0b2]/50 font-label text-[0.65rem] tracking-widest uppercase text-[#594238] hover:text-[#ad2b1f] hover:border-[#ad2b1f]/40 hover:bg-[#ffdad5] transition-all cursor-default"
               >
                 {tech}
               </span>
             ))}
           </div>
-        </Card>
-
-        {/* CTA */}
-        <div className="text-center space-y-4">
-          <h2 className="text-2xl font-bold text-foreground">Intéressé par une collaboration ?</h2>
-          <p className="text-muted-foreground">
-            N'hésitez pas à me contacter pour discuter de votre projet
-          </p>
-          <Button asChild size="lg">
-            <Link to="/contact">Me contacter</Link>
-          </Button>
         </div>
+
+        {/* ── CTA — primary bg block ── */}
+        <div className="relative rounded-xl overflow-hidden bg-[#ad2b1f] p-12 md:p-20 text-center">
+          <div className="relative z-10 space-y-6">
+            <h2 className="font-headline text-4xl md:text-6xl font-black tracking-tighter text-white uppercase leading-none">
+              Prêt à donner
+              <br />
+              <span className="italic opacity-80">vie</span> à votre projet ?
+            </h2>
+            <p className="font-body text-white/75 max-w-md mx-auto leading-relaxed">
+              Chaque grande aventure commence par un simple échange.
+              Discutons de la manière dont nous pouvons élever votre présence en ligne.
+            </p>
+            <Link
+              to="/contact"
+              className="group inline-flex items-center gap-3 bg-white text-[#ad2b1f] px-10 py-5 rounded-xl font-label font-bold uppercase tracking-widest text-sm hover:scale-105 transition-transform shadow-xl shadow-black/20"
+            >
+              Me contacter
+              <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </div>
+
       </div>
     </div>
   );

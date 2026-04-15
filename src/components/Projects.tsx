@@ -1,87 +1,92 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 const projects = [
   {
+    id: "mp3-cutter",
+    num: "01",
+    category: "WEB APP",
     title: "MP3 Cutter",
     description: "Application web pour découper et éditer des fichiers audio MP3 avec une interface intuitive et moderne.",
     link: "https://mp3cutter-tau.vercel.app/",
-    tags: ["React", "Audio API", "Web App"],
+    tags: ["React", "Audio API"],
+    size: "large",
   },
   {
+    id: "thioubene",
+    num: "02",
+    category: "E-COMMERCE",
     title: "Thioubene Multishop",
-    description: "Plateforme e-commerce complète avec gestion de produits, panier d'achat et système de paiement intégré.",
+    description: "Plateforme e-commerce complète avec gestion de produits, panier et système de paiement intégré.",
     link: "https://thioubene-multishop.com/",
-    tags: ["E-commerce", "React", "Full Stack"],
+    tags: ["React", "Full Stack"],
+    size: "small",
   },
   {
+    id: "e-poubelle",
+    num: "03",
+    category: "GREEN TECH",
     title: "E-Poubelle",
-    description: "Solution innovante de gestion des déchets avec géolocalisation et système de collecte intelligent.",
+    description: "Solution innovante de gestion des déchets avec géolocalisation et collecte intelligente.",
     link: "https://e-poubelle1.vercel.app/",
-    tags: ["React", "Geolocation", "Green Tech"],
+    tags: ["React", "Geolocation"],
+    size: "small",
   },
 ];
 
 const Projects = () => {
   return (
-    <section id="projets" className="py-24 px-6 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-card to-background" />
-      
-      <div className="container mx-auto relative z-10">
-        <div className="text-center space-y-4 mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold">
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Mes Projets
-            </span>
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Découvrez une sélection de mes réalisations récentes
-          </p>
-        </div>
+    <section id="projets" className="mb-32 px-6 md:px-12 max-w-7xl mx-auto">
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <Card
-              key={index}
-              className="group bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_30px_hsl(var(--primary)/0.2)] overflow-hidden"
-            >
-              <div className="p-6 space-y-4">
-                <div className="flex items-start justify-between">
-                  <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+      {/* Section header — editorial style */}
+      <div className="flex items-baseline gap-4 mb-16 overflow-hidden">
+        <h2 className="font-headline text-4xl md:text-6xl font-bold tracking-tighter shrink-0 text-[#1a1c1c]">
+          Mes Projets
+        </h2>
+        <div className="section-rule" />
+        <span className="text-eyebrow text-[#944a00] whitespace-nowrap">
+          Réalisations
+        </span>
+      </div>
+
+      {/* Grille symétrique avec boîtes égales */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {projects.map((project, i) => (
+          <div key={project.id} className="group">
+            {/* Image avec aspect ratio fixe */}
+            <div className="aspect-[4/3] overflow-hidden rounded-xl bg-[#e9e8e7] mb-6 relative">
+              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#e9e8e7] to-[#dadad9] group-hover:scale-105 transition-transform duration-700">
+                <div className="text-center space-y-3 p-8">
+                  <div className="text-6xl font-headline font-black text-[#ad2b1f] opacity-20">
+                    {project.num}
+                  </div>
+                  <div className="text-xl font-headline font-bold text-[#1a1c1c]">
                     {project.title}
-                  </h3>
-                  <ExternalLink className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                  </div>
                 </div>
-                
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {project.description}
-                </p>
-                
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag, tagIndex) => (
-                    <span
-                      key={tagIndex}
-                      className="px-3 py-1 text-xs font-medium bg-secondary rounded-full text-secondary-foreground"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                
-                <Button
-                  variant="ghost"
-                  className="w-full group-hover:bg-primary/10"
-                  asChild
-                >
-                  <a href={project.link} target="_blank" rel="noopener noreferrer">
-                    Visiter le projet
-                  </a>
-                </Button>
               </div>
-            </Card>
-          ))}
-        </div>
+            </div>
+            
+            <div className="flex flex-col gap-2">
+              <span className="text-eyebrow text-[10px] text-[#ad2b1f] tracking-[0.2em] font-bold block">
+                {project.num} / {project.category}
+              </span>
+              <h3 className="font-headline text-2xl font-bold tracking-tight text-[#1a1c1c] group-hover:text-[#ad2b1f] transition-colors">
+                {project.title}
+              </h3>
+              <p className="font-body text-sm text-[#594238] leading-relaxed line-clamp-2">
+                {project.description}
+              </p>
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 flex items-center gap-2 text-sm font-bold text-[#ad2b1f] hover:gap-3 transition-all"
+              >
+                Visiter <ExternalLink size={16} />
+              </a>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );

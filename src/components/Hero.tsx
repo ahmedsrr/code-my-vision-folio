@@ -1,47 +1,69 @@
-import { Button } from "@/components/ui/button";
-import { ArrowDown } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 const Hero = () => {
-  const scrollToProjects = () => {
-    document.getElementById("projets")?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-card" />
-      
-      {/* Animated background circles */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-pulse delay-700" />
-      
-      <div className="relative z-10 container mx-auto px-6 text-center">
-        <div className="space-y-6 animate-in fade-in duration-1000">
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
-            <span className="bg-gradient-to-r from-primary via-primary-glow to-accent bg-clip-text text-transparent">
-              Développeur Web
-            </span>
-            <br />
-            <span className="text-foreground">Front-End</span>
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
-            Je suis un développeur web front-end curieux et motivé. Je suis prêt à tourner toutes vos idées en code.
-          </p>
-          
-          <div className="flex gap-4 justify-center pt-8">
-            <Button variant="hero" size="lg" onClick={scrollToProjects}>
-              Voir mes projets
-            </Button>
-            <Button variant="glass" size="lg" asChild>
-              <a href="#contact">Me contacter</a>
-            </Button>
-          </div>
+    <section className="mb-24 flex flex-col md:flex-row items-end gap-8 md:gap-12 px-6 md:px-12 pt-12 md:pt-20 max-w-7xl mx-auto">
+
+      {/* Left — main headline (2/3 width) */}
+      <div className="w-full md:w-2/3 animate-fade-up">
+        {/* Eyebrow */}
+        <span className="text-eyebrow text-[#944a00] font-semibold mb-6 block">
+          DÉVELOPPEUR &amp; ARCHITECTE WEB
+        </span>
+
+        {/* Hero headline — editorial extreme scale */}
+        <h1 className="font-headline text-display-xl text-[#1a1c1c] mb-6">
+          CRÉER DES <br />
+          <span className="text-[#ad2b1f] italic">EXPÉRIENCES</span> <br />
+          NUMÉRIQUES.
+        </h1>
+
+        {/* Warm accent rule */}
+        <div className="h-2 w-32 bg-[#944a00] mb-8 rounded-sm" />
+
+        {/* Subtext */}
+        <p className="font-body text-lg text-[#594238] max-w-md leading-relaxed">
+          Je transforme vos visions les plus complexes en interfaces haut de gamme —
+          fluides, rapides, mémorables.
+        </p>
+      </div>
+
+      {/* Right — portrait / stat block (1/3 width) */}
+      <div className="w-full md:w-1/3 flex flex-col gap-8 animate-fade-up" style={{ animationDelay: "200ms" }}>
+
+        {/* Stats editorial block */}
+        <div className="bg-[#f4f3f2] rounded-xl p-8 space-y-6">
+          {[
+            { value: "4+", label: "Projets livrés" },
+            { value: "2+", label: "Années d'expérience" },
+            { value: "100%", label: "Full Stack" },
+          ].map((stat) => (
+            <div key={stat.label}>
+              <div className="font-headline text-4xl font-black text-[#ad2b1f]">{stat.value}</div>
+              <div className="text-eyebrow text-[#594238]">{stat.label}</div>
+            </div>
+          ))}
         </div>
-        
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-          <ArrowDown className="w-6 h-6 text-muted-foreground" />
+
+        {/* CTAs */}
+        <div className="flex flex-col sm:flex-row md:flex-col gap-3">
+          <Link
+            to="/projects"
+            className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl btn-primary font-label text-sm uppercase tracking-widest font-bold"
+          >
+            Voir mes projets
+            <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
+          </Link>
+          <Link
+            to="/about"
+            className="inline-flex items-center justify-center px-8 py-4 font-headline font-bold text-[#1a1c1c] border-b-2 border-[#ad2b1f] hover:opacity-60 transition-opacity"
+          >
+            Ma philosophie
+          </Link>
         </div>
       </div>
+
     </section>
   );
 };

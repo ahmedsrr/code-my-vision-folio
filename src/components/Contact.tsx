@@ -1,133 +1,133 @@
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Mail, Github, Linkedin } from "lucide-react";
+import { Mail, Github, Linkedin, ArrowRight } from "lucide-react";
 import { useState } from "react";
-import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [sent, setSent] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Message envoyé !",
-      description: "Je vous répondrai dans les plus brefs délais.",
-    });
+    setSent(true);
     setFormData({ name: "", email: "", message: "" });
+    setTimeout(() => setSent(false), 4000);
   };
 
-  return (
-    <section id="contact" className="py-24 px-6 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-background to-card" />
-      
-      <div className="container mx-auto relative z-10 max-w-4xl">
-        <div className="text-center space-y-4 mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold">
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Contact
-            </span>
-          </h2>
-          <p className="text-muted-foreground text-lg">
-            Discutons de votre prochain projet
-          </p>
-        </div>
+  const socials = [
+    { icon: Mail,     label: "Email",    value: "mohamedsarr97@gmail.com",  href: "mailto:mohamedsarr97@gmail.com" },
+    { icon: Github,   label: "GitHub",   value: "github.com/ahmedsrr",      href: "https://github.com/ahmedsrr" },
+    { icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/profil",    href: "#" },
+  ];
 
-        <div className="grid md:grid-cols-2 gap-8">
-          <Card className="bg-card/50 backdrop-blur-sm border-border/50 p-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <label htmlFor="name" className="text-sm font-medium text-foreground">
-                  Nom
-                </label>
-                <Input
-                  id="name"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="bg-secondary/50 border-border"
-                  required
-                />
+  return (
+    <section id="contact" className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+
+      {/* Section header */}
+      <div className="flex items-baseline gap-4 mb-16 overflow-hidden">
+        <h2 className="font-headline text-4xl md:text-6xl font-bold tracking-tighter shrink-0 text-[#1a1c1c]">
+          Contact
+        </h2>
+        <div className="section-rule" />
+        <span className="text-eyebrow text-[#944a00] whitespace-nowrap">
+          Travaillons ensemble
+        </span>
+      </div>
+
+      <div className="grid lg:grid-cols-[1fr_360px] gap-12 items-start">
+
+        {/* ── Form ── */}
+        <div className="bg-[#f4f3f2] rounded-xl p-8 md:p-12">
+          {sent ? (
+            <div className="flex flex-col items-center justify-center gap-4 py-12 text-center">
+              <div className="w-14 h-14 rounded-full bg-[#ffdad5] flex items-center justify-center">
+                <ArrowRight size={22} className="text-[#ad2b1f]" strokeWidth={1.5} />
               </div>
-              
+              <p className="font-headline text-xl font-bold text-[#1a1c1c]">Message envoyé !</p>
+              <p className="font-body text-sm text-[#594238]">Je vous répondrai très rapidement.</p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-8">
+              {[
+                { id: "name",  label: "Nom",   type: "text",  placeholder: "Votre nom" },
+                { id: "email", label: "Email", type: "email", placeholder: "votre@email.com" },
+              ].map((field) => (
+                <div key={field.id} className="space-y-2">
+                  <label
+                    htmlFor={field.id}
+                    className="block text-eyebrow text-[0.6rem] text-[#594238]"
+                  >
+                    {field.label}
+                  </label>
+                  <input
+                    id={field.id}
+                    type={field.type}
+                    placeholder={field.placeholder}
+                    value={formData[field.id as "name" | "email"]}
+                    onChange={(e) => setFormData({ ...formData, [field.id]: e.target.value })}
+                    required
+                    className="w-full bg-transparent text-sm text-[#1a1c1c] placeholder:text-[#594238]/40 border-0 border-b-2 border-[#e0c0b2]/50 focus:border-[#ad2b1f] outline-none px-0 py-3 transition-colors rounded-none font-body"
+                  />
+                </div>
+              ))}
+
               <div className="space-y-2">
-                <label htmlFor="email" className="text-sm font-medium text-foreground">
-                  Email
-                </label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="bg-secondary/50 border-border"
-                  required
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium text-foreground">
+                <label htmlFor="message" className="block text-eyebrow text-[0.6rem] text-[#594238]">
                   Message
                 </label>
-                <Textarea
+                <textarea
                   id="message"
+                  placeholder="Décrivez votre projet…"
+                  rows={5}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="bg-secondary/50 border-border min-h-32"
                   required
+                  className="w-full bg-transparent text-sm text-[#1a1c1c] placeholder:text-[#594238]/40 border-0 border-b-2 border-[#e0c0b2]/50 focus:border-[#ad2b1f] outline-none px-0 py-3 transition-colors rounded-none resize-none font-body"
                 />
               </div>
-              
-              <Button type="submit" variant="hero" className="w-full">
+
+              <button
+                type="submit"
+                className="group inline-flex items-center gap-2 px-8 py-4 rounded-xl btn-primary font-label text-xs uppercase tracking-widest font-bold w-full justify-center"
+              >
                 Envoyer le message
-              </Button>
+                <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+              </button>
             </form>
-          </Card>
+          )}
+        </div>
 
-          <div className="space-y-6">
-            <Card className="bg-card/50 backdrop-blur-sm border-border/50 p-6">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Mail className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-foreground">Email</h3>
-                  <a href="mailto:mohamedsarr97@gmail.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    mohamedsarr97@gmail.com
-                  </a>
-                </div>
-              </div>
-            </Card>
+        {/* ── Socials sidebar ── */}
+        <div className="flex flex-col gap-6">
+          <p className="font-body text-[#594238] leading-relaxed">
+            Chaque grande aventure commence par un simple échange.
+            Discutons de la manière dont nous pouvons élever votre présence en ligne.
+          </p>
 
-            <Card className="bg-card/50 backdrop-blur-sm border-border/50 p-6">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Github className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-foreground">GitHub</h3>
-                  <p className="text-sm text-muted-foreground">github.com/votre-profil</p>
-                </div>
-              </div>
-            </Card>
-
-            <Card className="bg-card/50 backdrop-blur-sm border-border/50 p-6">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Linkedin className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-foreground">LinkedIn</h3>
-                  <p className="text-sm text-muted-foreground">linkedin.com/in/votre-profil</p>
-                </div>
-              </div>
-            </Card>
+          <div className="space-y-3">
+            {socials.map((s) => {
+              const Icon = s.icon;
+              return (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target={s.href.startsWith("http") ? "_blank" : undefined}
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-4 p-5 bg-[#f4f3f2] rounded-xl hover:bg-[#e9e8e7] transition-colors"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-[#ffdad5] flex items-center justify-center group-hover:bg-[#ad2b1f] transition-colors flex-shrink-0">
+                    <Icon size={16} strokeWidth={1.5} className="text-[#ad2b1f] group-hover:text-white transition-colors" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-eyebrow text-[0.6rem] text-[#594238] mb-0.5">{s.label}</p>
+                    <p className="font-body text-xs text-[#1a1c1c] font-medium truncate group-hover:text-[#ad2b1f] transition-colors">
+                      {s.value}
+                    </p>
+                  </div>
+                </a>
+              );
+            })}
           </div>
         </div>
+
       </div>
     </section>
   );

@@ -1,78 +1,237 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,400;0,700;0,800;0,900;1,700;1,800;1,900&family=Manrope:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 220 20% 20%;
+    /* === THE SAHARAN EDITORIAL — Surface Hierarchy (Light Mode) === */
+    --surface:                   40 20% 97%;    /* #faf9f8 */
+    --surface-bright:            0 0% 100%;     /* #ffffff */
+    --surface-container-lowest:  0 0% 100%;
+    --surface-container-low:     40 10% 96%;    /* #f4f3f2 */
+    --surface-container:         40 8% 93%;     /* #eeeeed */
+    --surface-container-high:    40 7% 91%;     /* #e9e8e7 */
+    --surface-container-highest: 40 6% 89%;     /* #e3e2e1 */
+    --surface-dim:               40 9% 85%;     /* #dadad9 */
 
-    --card: 0 0% 98%;
-    --card-foreground: 220 20% 20%;
+    /* === Shadcn Mapping === */
+    --background:                40 20% 97%;
+    --foreground:                180 5% 11%;    /* #1a1c1c */
 
-    --popover: 0 0% 98%;
-    --popover-foreground: 220 20% 20%;
+    --card:                      0 0% 100%;
+    --card-foreground:           180 5% 11%;
 
-    --primary: 25 70% 45%;
-    --primary-foreground: 0 0% 100%;
-    --primary-glow: 30 80% 55%;
+    --popover:                   0 0% 100%;
+    --popover-foreground:        180 5% 11%;
 
-    --secondary: 210 20% 96%;
-    --secondary-foreground: 220 20% 20%;
+    /* Deep red — primary */
+    --primary:                   4 66% 40%;     /* #ad2b1f */
+    --primary-foreground:        0 0% 100%;
+    --primary-container:         4 59% 50%;     /* #cf4434 */
 
-    --muted: 210 20% 96%;
-    --muted-foreground: 220 15% 45%;
+    /* Warm orange — secondary */
+    --secondary:                 30 100% 29%;   /* #944a00 */
+    --secondary-foreground:      0 0% 100%;
+    --secondary-container:       28 97% 60%;    /* #fc8f34 */
 
-    --accent: 35 75% 50%;
-    --accent-foreground: 0 0% 100%;
+    --muted:                     40 8% 93%;
+    --muted-foreground:          15 25% 37%;    /* #594238 */
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --accent:                    28 97% 60%;
+    --accent-foreground:         30 100% 19%;   /* #663100 */
 
-    --border: 220 15% 88%;
-    --input: 220 15% 88%;
-    --ring: 25 70% 45%;
+    --destructive:               0 71% 40%;     /* #ba1a1a */
+    --destructive-foreground:    0 0% 100%;
 
-    --radius: 0.75rem;
+    --border:                    17 43% 80%;    /* #e0c0b2 */
+    --input:                     40 10% 96%;
+    --ring:                      4 66% 40%;
 
-    --gradient-primary: linear-gradient(135deg, hsl(25 70% 45%), hsl(30 80% 55%));
-    --gradient-accent: linear-gradient(135deg, hsl(35 75% 50%), hsl(40 80% 55%));
-    --shadow-glow: 0 0 40px hsl(25 70% 45% / 0.2);
-    --shadow-card: 0 10px 40px hsl(0 0% 0% / 0.1);
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius: 0.5rem;
+
+    /* === Custom tokens === */
+    --on-surface:            180 5% 11%;         /* #1a1c1c */
+    --on-surface-variant:    15 25% 37%;         /* #594238 */
+    --outline:               18 18% 55%;         /* #8c7166 */
+    --outline-variant:       17 43% 80%;         /* #e0c0b2 */
+    --primary-fixed:         4 100% 93%;         /* #ffdad5 */
+    --on-primary-fixed:      0 100% 13%;         /* #410000 */
+    --secondary-fixed:       24 100% 90%;        /* #ffdcc5 */
+
+    --shadow-ambient: 0 8px 32px rgba(26,28,28,.08);
+    --shadow-primary: 0 8px 32px rgba(173,43,31,.2);
+    --transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
+/* ==============================
+   BASE RESETS & BODY
+============================== */
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-background text-foreground;
-    position: relative;
+    font-family: 'Manrope', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #faf9f8;
+    color: #1a1c1c;
+    overflow-x: hidden;
   }
 
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    opacity: 0.3;
-    background-image: radial-gradient(circle, hsl(25 60% 85%) 1px, transparent 1px);
-    background-size: 24px 24px;
-    pointer-events: none;
+  h1, h2, h3, h4 {
+    font-family: 'Epilogue', sans-serif;
+  }
+}
+
+/* ==============================
+   TYPOGRAPHY UTILITIES
+============================== */
+@layer utilities {
+  .text-display-xl {
+    font-family: 'Epilogue', sans-serif;
+    font-size: clamp(4rem, 10vw, 8rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 0.85;
   }
 
-  body > * {
-    position: relative;
-    z-index: 1;
+  .text-display-lg {
+    font-family: 'Epilogue', sans-serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 0.88;
   }
+
+  .text-display-md {
+    font-family: 'Epilogue', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 0.92;
+  }
+
+  .text-display-sm {
+    font-family: 'Epilogue', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .text-eyebrow {
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  /* Primary gradient — warm red */
+  .gradient-primary {
+    background: linear-gradient(135deg, #ad2b1f, #cf4434);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Primary CTA button gradient */
+  .btn-primary {
+    background: linear-gradient(135deg, #ad2b1f, #cf4434);
+    color: #ffffff;
+    box-shadow: 0 8px 24px rgba(173,43,31,.25);
+    transition: filter 0.2s ease, transform 0.15s ease;
+  }
+  .btn-primary:hover {
+    filter: brightness(1.08);
+  }
+  .btn-primary:active {
+    transform: scale(0.97);
+  }
+
+  /* Glassmorphism — warm surface */
+  .glass {
+    background: rgba(250, 249, 248, 0.82);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(224, 192, 178, 0.25);
+  }
+
+  /* Tonal card — soft lift */
+  .card-elevated {
+    background: #ffffff;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+  .card-elevated:hover {
+    background: #ffffff;
+    transform: translateY(-4px);
+  }
+
+  /* Ghost border fallback */
+  .border-ghost {
+    border: 1px solid rgba(140, 113, 102, 0.15);
+  }
+
+  /* Patterned break strip */
+  .patterned-break {
+    height: 8px;
+    background: #f4f3f2;
+    border-radius: 9999px;
+    overflow: hidden;
+    position: relative;
+  }
+  .patterned-break::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 16px,
+      rgba(173, 43, 31, 0.15) 16px,
+      rgba(173, 43, 31, 0.15) 20px
+    );
+  }
+
+  /* Section separator line — thin outlined */
+  .section-rule {
+    height: 1px;
+    background: rgba(224, 192, 178, 0.35);
+    flex: 1;
+  }
+}
+
+/* ==============================
+   SCROLLBAR
+============================== */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #f4f3f2;
+}
+::-webkit-scrollbar-thumb {
+  background: #e0c0b2;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ad2b1f;
+}
+
+/* ==============================
+   SELECTION
+============================== */
+::selection {
+  background: #ffdad5;
+  color: #410000;
 }
